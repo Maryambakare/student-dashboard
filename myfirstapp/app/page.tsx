@@ -115,7 +115,13 @@ function SummaryCard({ label, value, detail, accent, icon }: SummaryCardProps) {
 
 export default function Home() {
   const [assignments, setAssignments] = useState(initialAssignments);
+  const [filter, setFilter] = useState<"all" | "pending" | "completed">("all");
   const completedCount = assignments.filter((assignment) => assignment.completed).length;
+  const filteredAssignments = assignments.filter((assignment) => {
+  if (filter === "pending") return !assignment.completed;
+  if (filter === "completed") return assignment.completed;
+  return true;
+});
 
   function toggleAssignment(id: number) {
     setAssignments((currentAssignments) =>
@@ -231,8 +237,25 @@ export default function Home() {
             </div>
             <span className="text-xs text-[#898b82]">{assignments.length - completedCount} remaining</span>
           </div>
+          <div className="mb-4 flex gap-2">
+  {(["all", "pending", "completed"] as const).map((option) => (
+    <button
+      key={option}
+      type="button"
+      onClick={() => setFilter(option)}
+      aria-pressed={filter === option}
+      className={`rounded border px-3 py-2 text-xs font-medium capitalize transition-colors ${
+        filter === option
+          ? "border-[#3d674c] bg-[#3d674c] text-white"
+          : "border-[#e8e7df] bg-white text-[#55574f] hover:bg-[#f5f5f0]"
+      }`}
+    >
+      {option === "all" ? "All" : option === "pending" ? "Pending" : "Completed"}
+    </button>
+  ))}
+</div>
           <div className="divide-y divide-[#eeeee8] rounded-[5px] border border-[#e8e7df] bg-white px-5 sm:px-6">
-            {assignments.map((assignment) => (
+            {filteredAssignments.map((assignment) => (
             <article key={assignment.id} className={`flex flex-col gap-4 py-5 transition duration-200 hover:bg-[#fafaf7] sm:flex-row sm:items-center sm:justify-between ${assignment.completed ? "opacity-65" : ""}`}>
                 <div className="flex min-w-0 items-center gap-3">
                   <span className={`grid size-10 shrink-0 place-items-center rounded-[4px] ${assignment.color}`} aria-hidden="true">
