@@ -82,7 +82,7 @@ const courses = [
 
 function SummaryCard({ label, value, detail, accent, icon }: SummaryCardProps) {
   return (
-    <article className="flex min-h-[142px] items-start justify-between rounded-[5px] border border-[#e8e7df] bg-white p-5 sm:p-6">
+<article className="flex min-h-[142px] items-start justify-between rounded-[5px] border border-[#e8e7df] bg-white p-5 sm:p-6 transition duration-200 hover:-translate-y-1 hover:shadow-md">
       <div>
         <p className="text-sm font-medium text-[#77796f]">{label}</p>
         <p className="mt-3 text-[32px] font-semibold leading-none tracking-[-1.2px] text-[#252922]">
