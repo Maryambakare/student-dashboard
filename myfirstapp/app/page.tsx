@@ -204,7 +204,7 @@ export default function Home() {
           </div>
           <div className="grid gap-3 xl:grid-cols-3">
             {courses.map((course) => (
-              <article key={course.code} className="rounded-[5px] border border-[#e8e7df] bg-white p-5">
+<article key={course.code} className="rounded-[5px] border border-[#e8e7df] bg-white p-5 transition duration-200 hover:-translate-y-1 hover:shadow-md">
                 <div className="flex items-start justify-between gap-3">
                   <span className={`grid size-10 shrink-0 place-items-center rounded-[4px] text-xs font-semibold ${course.badge}`}>{course.mark}</span>
                   <span className="rounded-[3px] bg-[#f5f5f0] px-2 py-1 text-[10px] font-medium tracking-[0.5px] text-[#77796f]">{course.code}</span>
