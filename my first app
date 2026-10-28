@@ -1,0 +1,137 @@
+"use client";
+
+import { useState } from "react";
+
+interface Assignment {
+	id: number;
+	title: string;
+	course: string;
+	dueDate: string;
+	status: "Upcoming" | "Completed";
+}
+
+interface SummaryCardProps {
+	label: string;
+	value: string;
+	detail: string;
+	icon: string;
+	iconStyle: string;
+}
+
+function SummaryCard({ label, value, detail, icon, iconStyle }: SummaryCardProps) {
+	return (
+		<article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+			<div className="flex items-start justify-between">
+				<div>
+					<p className="text-sm font-medium text-slate-500">{label}</p>
+					<p className="mt-2 text-3xl font-bold tracking-tight text-slate-900">{value}</p>
+				</div>
+				<span className={`grid h-11 w-11 place-items-center rounded-xl text-xl ${iconStyle}`} aria-hidden="true">{icon}</span>
+			</div>
+			<p className="mt-4 text-sm text-slate-500">{detail}</p>
+		</article>
+	);
+}
+
+const courses = [
+	{ name: "Introduction to Psychology", code: "PSY 101", progress: 78, color: "bg-violet-500", icon: "🧠" },
+	{ name: "Web Development", code: "CS 204", progress: 62, color: "bg-sky-500", icon: "💻" },
+	{ name: "Business Statistics", code: "BUS 230", progress: 91, color: "bg-emerald-500", icon: "📊" },
+];
+
+const initialAssignments: Assignment[] = [
+	{ id: 1, title: "Research reflection", course: "Introduction to Psychology", dueDate: "Oct 24", status: "Upcoming" },
+	{ id: 2, title: "Responsive portfolio page", course: "Web Development", dueDate: "Oct 26", status: "Upcoming" },
+	{ id: 3, title: "Probability problem set", course: "Business Statistics", dueDate: "Oct 29", status: "Upcoming" },
+];
+
+export default function StudentDashboard() {
+	const [assignments, setAssignments] = useState<Assignment[]>(initialAssignments);
+	const completedCount = assignments.filter((assignment) => assignment.status === "Completed").length;
+
+	function markAsCompleted(id: number) {
+		setAssignments((current) =>
+			current.map((assignment) =>
+				assignment.id === id ? { ...assignment, status: "Completed" } : assignment,
+			),
+		);
+	}
+
+	return (
+		<main id="dashboard" className="min-h-screen bg-slate-50 text-slate-900">
+			<header className="border-b border-slate-200 bg-white">
+				<div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
+					<a href="#dashboard" className="flex items-center gap-3 font-bold tracking-tight" aria-label="Campus dashboard">
+						<span className="grid h-10 w-10 place-items-center rounded-xl bg-indigo-600 text-lg text-white">C</span>
+						<span className="text-lg">Campus<span className="text-indigo-600">.</span></span>
+					</a>
+					<div className="flex items-center gap-3">
+						<span className="hidden text-right sm:block"><span className="block text-sm font-semibold">Jamie Morgan</span><span className="text-xs text-slate-500">Student</span></span>
+						<span className="grid h-10 w-10 place-items-center rounded-full bg-amber-100 font-semibold text-amber-800" aria-label="Jamie Morgan">JM</span>
+					</div>
+				</div>
+			</header>
+
+			<div className="mx-auto max-w-7xl px-5 py-8 sm:px-8 sm:py-10">
+				<section className="mb-8 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+					<div>
+						<p className="text-sm font-semibold text-indigo-600">Your student dashboard</p>
+						<h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Good morning, Jamie 👋</h1>
+						<p className="mt-2 text-slate-500">Here’s what’s happening with your studies.</p>
+					</div>
+					<div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+						<span className="grid h-10 w-10 place-items-center rounded-full bg-indigo-50 text-xl" aria-hidden="true">🎓</span>
+						<div><p className="text-sm font-semibold">Student profile</p><p className="text-xs text-slate-500">Computer Science · Year 2</p></div>
+					</div>
+				</section>
+
+				<section aria-label="Academic summary" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+					<SummaryCard label="Enrolled courses" value="3" detail="Across this semester" icon="📚" iconStyle="bg-indigo-50" />
+					<SummaryCard label="Assignments due" value={String(assignments.length - completedCount)} detail="Stay on top of your work" icon="📝" iconStyle="bg-amber-50" />
+					<SummaryCard label="Average grade" value="A−" detail="You’re doing great this term" icon="⭐" iconStyle="bg-emerald-50" />
+				</section>
+
+				<section className="mt-10" aria-labelledby="courses-heading">
+					<div className="mb-5"><h2 id="courses-heading" className="text-xl font-bold">My courses</h2><p className="mt-1 text-sm text-slate-500">Your progress this semester</p></div>
+					<div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+						{courses.map((course) => (
+							<article key={course.code} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+								<div className="flex items-center gap-3">
+									<span className="grid h-12 w-12 place-items-center rounded-xl bg-slate-100 text-2xl" aria-hidden="true">{course.icon}</span>
+									<div><p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{course.code}</p><h3 className="mt-1 font-semibold">{course.name}</h3></div>
+								</div>
+								<div className="mt-6 flex items-center justify-between text-sm"><span className="text-slate-500">Course progress</span><span className="font-semibold">{course.progress}%</span></div>
+								<div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100" role="progressbar" aria-label={`${course.name} progress`} aria-valuenow={course.progress} aria-valuemin={0} aria-valuemax={100}>
+									<div className={`h-full rounded-full ${course.color}`} style={{ width: `${course.progress}%` }} />
+								</div>
+							</article>
+						))}
+					</div>
+				</section>
+
+				<section className="mt-10" aria-labelledby="assignments-heading">
+					<div className="mb-5 flex items-end justify-between">
+						<div><h2 id="assignments-heading" className="text-xl font-bold">Assignments</h2><p className="mt-1 text-sm text-slate-500">Your upcoming work, all in one place</p></div>
+						<span className="rounded-full bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-700">{completedCount} completed</span>
+					</div>
+					<div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+						<ul className="divide-y divide-slate-100">
+							{assignments.map((assignment) => (
+								<li key={assignment.id} className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+									<div className="flex items-start gap-3">
+										<span className={`mt-1 grid h-10 w-10 shrink-0 place-items-center rounded-xl ${assignment.status === "Completed" ? "bg-emerald-50 text-emerald-600" : "bg-amber-50 text-amber-700"}`} aria-hidden="true">{assignment.status === "Completed" ? "✓" : "↗"}</span>
+										<div><h3 className="font-semibold">{assignment.title}</h3><p className="mt-1 text-sm text-slate-500">{assignment.course}</p><p className="mt-1 text-xs text-slate-400">Due {assignment.dueDate}</p></div>
+									</div>
+									<button type="button" onClick={() => markAsCompleted(assignment.id)} disabled={assignment.status === "Completed"} className="rounded-lg border border-indigo-200 px-4 py-2 text-sm font-semibold text-indigo-700 transition hover:bg-indigo-50 disabled:cursor-default disabled:border-emerald-200 disabled:bg-emerald-50 disabled:text-emerald-700">
+										{assignment.status === "Completed" ? "Completed ✓" : "Mark as Completed"}
+									</button>
+								</li>
+							))}
+						</ul>
+					</div>
+				</section>
+				<footer className="py-8 text-center text-xs text-slate-400">Keep learning, one day at a time.</footer>
+			</div>
+		</main>
+	);
+}
