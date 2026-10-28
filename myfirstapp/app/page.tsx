@@ -201,7 +201,7 @@ export default function Home() {
         </section>
 
         <section id="courses" className="mt-10 scroll-mt-6">
-          <div className="mb-4 flex items-end justify-between">
+          <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-[1.3px] text-[#8b8d81]">Fall semester · 2026</p>
               <h2 className="mt-1 text-xl font-semibold tracking-[-0.4px]">Your courses</h2>
