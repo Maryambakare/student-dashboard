@@ -233,7 +233,7 @@ export default function Home() {
           </div>
           <div className="divide-y divide-[#eeeee8] rounded-[5px] border border-[#e8e7df] bg-white px-5 sm:px-6">
             {assignments.map((assignment) => (
-              <article key={assignment.id} className={`flex flex-col gap-4 py-5 sm:flex-row sm:items-center sm:justify-between ${assignment.completed ? "opacity-65" : ""}`}>
+            <article key={assignment.id} className={`flex flex-col gap-4 py-5 transition duration-200 hover:bg-[#fafaf7] sm:flex-row sm:items-center sm:justify-between ${assignment.completed ? "opacity-65" : ""}`}>
                 <div className="flex min-w-0 items-center gap-3">
                   <span className={`grid size-10 shrink-0 place-items-center rounded-[4px] ${assignment.color}`} aria-hidden="true">
                     <svg viewBox="0 0 24 24" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="1.7">
