@@ -2,16 +2,21 @@
 
 import { useState } from "react";
 
+
+type AssignmentColor =
+  | "bg-[#d9e9df] text-[#315e47]"
+  | "bg-[#f7e5c5] text-[#95631c]"
+  | "bg-[#dce7ef] text-[#456b87]";
+
 interface Assignment {
   id: number;
   title: string;
   course: string;
   dueDate: string;
   dueLabel: string;
-  color: string;
+  color: AssignmentColor;
   completed: boolean;
 }
-
 interface SummaryCardProps {
   label: string;
   value: string;
