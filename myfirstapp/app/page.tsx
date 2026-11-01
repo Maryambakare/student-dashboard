@@ -47,7 +47,7 @@ const initialAssignments: Assignment[] = [
   {
     id: 3,
     title: "Mobile Device and IoT Security: Threats, Vulnerabilities, and Countermeasures",
-    course: "SUN-CYB 307 - Mobile Device and IoT Security",
+    course: "SUN-CYB 307 ",
     dueDate: "Nov 02",
     dueLabel: "Due in 7 days",
     color: "bg-[#dce7ef] text-[#456b87]",
@@ -166,7 +166,7 @@ export default function Home() {
 
         <div className="mt-auto border-t border-[#e8e7df] pt-5">
           <div className="flex items-center gap-3 px-2">
-            <span className="grid size-9 place-items-center rounded-full bg-[#e7d9c5] text-xs font-semibold text-[#775d3d]">AM</span>
+            <span className="grid size-9 place-items-center rounded-full bg-[#e7d9c5] text-xs font-semibold text-[#775d3d]">FA</span>
             <div className="min-w-0">
               <p className="truncate text-sm font-medium">Alex Morgan</p>
               <p className="text-xs text-[#898b82]">Class of 2027</p>
@@ -181,10 +181,10 @@ export default function Home() {
             <span className="grid size-8 place-items-center rounded-[4px] bg-[#3d674c] text-white" aria-hidden="true">f.</span>
             fieldnotes
           </a>
-          <p className="hidden text-[13px] text-[#77796f] lg:block">Monday, October 26, 2026 <span className="mx-2 text-[#c4c4ba]">/</span> Fall semester</p>
+          <p className="hidden text-[13px] text-[#77796f] lg:block">Monday, October 26, 2026 <span className="mx-2 text-[#c4c4ba]">/</span> First semester</p>
           <div className="flex items-center gap-3 sm:gap-5">
-            <span className="hidden text-sm text-[#77796f] sm:block">Good morning, Alex</span>
-            <span className="grid size-9 place-items-center rounded-full bg-[#e7d9c5] text-xs font-semibold text-[#775d3d] lg:hidden" aria-label="Alex Morgan">AM</span>
+            <span className="hidden text-sm text-[#77796f] sm:block">Good day, Fatimah</span>
+            <span className="grid size-9 place-items-center rounded-full bg-[#e7d9c5] text-xs font-semibold text-[#775d3d] lg:hidden" aria-label="Fatimah Ali">AM</span>
             <span className="grid size-9 place-items-center rounded-full border border-[#e5e5dd] bg-white text-[#77796f]" aria-label="Notifications">
               <svg viewBox="0 0 24 24" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
                 <path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" />
@@ -194,7 +194,7 @@ export default function Home() {
         </header>
 
         <section className="pb-8 pt-8 sm:pb-9 sm:pt-10">
-          <p className="text-xs font-semibold uppercase tracking-[1.4px] text-[#8b8d81]">Your learning space</p>
+          <p className="text-xs font-semibold uppercase tracking-[1.4px] text-[#8b8d81]">Your Dashboard</p>
           <h1 className="mt-2 text-[30px] font-semibold leading-tight tracking-[-1px] sm:text-[36px]">A good week to learn.</h1>
           <p className="mt-2 text-sm text-[#77796f]">Here’s what’s happening with your semester.</p>
         </section>
@@ -202,13 +202,13 @@ export default function Home() {
         <section aria-label="Academic summary" className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           <SummaryCard label="Active courses" value="03" detail="All courses on track" accent="bg-[#e8efe8] text-[#41664d]" icon="courses" />
           <SummaryCard label="Assignments done" value={`${String(completedCount).padStart(2, "0")} / 03`} detail="Keep your momentum going" accent="bg-[#f5ead7] text-[#9b6b25]" icon="assignments" />
-          <SummaryCard label="Current average" value="A−" detail="Across all enrolled courses" accent="bg-[#e3ebef] text-[#4d7185]" icon="grade" />
+          <SummaryCard label="Current average" value="A+" detail="Across all enrolled courses" accent="bg-[#e3ebef] text-[#4d7185]" icon="grade" />
         </section>
 
         <section id="courses" className="mt-10 scroll-mt-6">
           <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[1.3px] text-[#8b8d81]">Fall semester · 2026</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[1.3px] text-[#8b8d81]">First semester · 2026</p>
               <h2 className="mt-1 text-xl font-semibold tracking-[-0.4px]">Your courses</h2>
             </div>
             <span className="text-xs text-[#898b82]">3 enrolled</span>
