@@ -168,7 +168,7 @@ export default function Home() {
           <div className="flex items-center gap-3 px-2">
             <span className="grid size-9 place-items-center rounded-full bg-[#e7d9c5] text-xs font-semibold text-[#775d3d]">FA</span>
             <div className="min-w-0">
-              <p className="truncate text-sm font-medium">Alex Morgan</p>
+              <p className="truncate text-sm font-medium">Fatimah Ali</p>
               <p className="text-xs text-[#898b82]">Class of 2027</p>
             </div>
           </div>
