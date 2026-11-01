@@ -28,8 +28,8 @@ interface SummaryCardProps {
 const initialAssignments: Assignment[] = [
   {
     id: 1,
-    title: "Research essay outline",
-    course: "World Literature",
+    title: "Acadopreneurship and Cybersecurity: A Comprehensive Guide",
+    course: "SUN-ICT 301 - Acadopreneurship and Cybersecurity",
     dueDate: "Oct 28",
     dueLabel: "Due in 2 days",
     color: "bg-[#d9e9df] text-[#315e47]",
@@ -37,8 +37,8 @@ const initialAssignments: Assignment[] = [
   },
   {
     id: 2,
-    title: "Problem set 06",
-    course: "Calculus II",
+    title: "Artificial Intelligence and Machine Learning in Cybersecurity",
+    course: "CSC 309 - Artificial Intelligence and Machine Learning",
     dueDate: "Oct 30",
     dueLabel: "Due in 4 days",
     color: "bg-[#f7e5c5] text-[#95631c]",
@@ -46,8 +46,8 @@ const initialAssignments: Assignment[] = [
   },
   {
     id: 3,
-    title: "Ecosystem field notes",
-    course: "Environmental Science",
+    title: "Mobile Device and IoT Security: Threats, Vulnerabilities, and Countermeasures",
+    course: "SUN-CYB 307 - Mobile Device and IoT Security",
     dueDate: "Nov 02",
     dueLabel: "Due in 7 days",
     color: "bg-[#dce7ef] text-[#456b87]",
@@ -57,8 +57,8 @@ const initialAssignments: Assignment[] = [
 
 const courses = [
   {
-    name: "World Literature",
-    code: "ENG 204",
+    name: "Cryptography Techniques, Algorithms and Applications",
+    code: "CYB 301",
     instructor: "Dr. Elena Morris",
     progress: 72,
     color: "bg-[#48785a]",
@@ -66,8 +66,8 @@ const courses = [
     badge: "bg-[#e0ebe3] text-[#41664d]",
   },
   {
-    name: "Calculus II",
-    code: "MAT 231",
+    name: "Cybersecurity Risks Analysis, Challenges and Mitigation Strategies",
+    code: "CYB 303",
     instructor: "Prof. David Chen",
     progress: 58,
     color: "bg-[#c58b36]",
@@ -75,8 +75,8 @@ const courses = [
     badge: "bg-[#f5ead7] text-[#9b6b25]",
   },
   {
-    name: "Environmental Science",
-    code: "BIO 118",
+    name: "Digital  Forensics and Investigation Methods",
+    code: "CYB 305",
     instructor: "Dr. Priya Shah",
     progress: 86,
     color: "bg-[#63879b]",
