@@ -1,5 +1,4 @@
-import EventCard from "./components/event-card";
-import events from "./data";
+import EventExplorer from "./components/event-explorer";
 
 export default function Home() {
   return (
@@ -53,27 +52,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="upcoming" className="scroll-mt-24">
-        <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[1.5px] text-[#81917d]">
-              Your campus calendar
-            </p>
-            <h2 className="mt-2 text-[28px] font-semibold tracking-[-1px] text-[#292e28] sm:text-[32px]">
-              Upcoming events
-            </h2>
-          </div>
-          <p className="text-sm text-[#7b8077]">
-            <span className="font-semibold text-[#3d674c]">{events.length}</span> ways to spend your time well
-          </p>
-        </div>
-
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {events.map((event) => (
-            <EventCard key={event.id} event={event} />
-          ))}
-        </div>
-      </section>
+      <EventExplorer />
     </main>
   );
 }
