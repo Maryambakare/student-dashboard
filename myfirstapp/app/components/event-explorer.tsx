@@ -11,6 +11,7 @@ export default function EventExplorer() {
   const [selectedCategory, setSelectedCategory] =
     useState<(typeof categories)[number]>("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [sortOrder, setSortOrder] = useState<"soonest" | "latest">("soonest");
   const normalizedQuery = searchQuery.trim().toLowerCase();
   const filteredEvents = events.filter((event) => {
     const matchesCategory =
@@ -18,6 +19,11 @@ export default function EventExplorer() {
     const matchesSearch = event.title.toLowerCase().includes(normalizedQuery);
     return matchesCategory && matchesSearch;
   });
+  const sortedEvents = [...filteredEvents].sort((first, second) =>
+    sortOrder === "soonest"
+      ? first.date.localeCompare(second.date)
+      : second.date.localeCompare(first.date),
+  );
 
   return (
     <section id="upcoming" className="scroll-mt-24">
@@ -36,36 +42,51 @@ export default function EventExplorer() {
         </p>
       </div>
 
-      <label className="mb-5 flex h-12 max-w-[420px] items-center gap-3 rounded-xl border border-[#e5e7df] bg-white px-4 transition-colors focus-within:border-[#8da68d]">
-        <svg
-          viewBox="0 0 24 24"
-          className="size-[18px] shrink-0 text-[#848a80]"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.7"
-          aria-hidden="true"
-        >
-          <circle cx="10.8" cy="10.8" r="6.8" />
-          <path d="m16 16 4.2 4.2" />
-        </svg>
-        <span className="sr-only">Search events by title</span>
-        <input
-          type="search"
-          value={searchQuery}
-          onChange={(event) => setSearchQuery(event.target.value)}
-          placeholder="Search events by title..."
-          className="h-full min-w-0 flex-1 bg-transparent text-sm text-[#30362f] outline-none placeholder:text-[#a0a49b]"
-        />
-        {searchQuery && (
-          <button
-            type="button"
-            onClick={() => setSearchQuery("")}
-            className="rounded-full px-2 py-1 text-xs font-medium text-[#687265] hover:bg-[#f1f3ee]"
+      <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <label className="flex h-12 max-w-[420px] flex-1 items-center gap-3 rounded-xl border border-[#e5e7df] bg-white px-4 transition-colors focus-within:border-[#8da68d]">
+          <svg
+            viewBox="0 0 24 24"
+            className="size-[18px] shrink-0 text-[#848a80]"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.7"
+            aria-hidden="true"
           >
-            Clear
-          </button>
-        )}
-      </label>
+            <circle cx="10.8" cy="10.8" r="6.8" />
+            <path d="m16 16 4.2 4.2" />
+          </svg>
+          <span className="sr-only">Search events by title</span>
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            placeholder="Search events by title..."
+            className="h-full min-w-0 flex-1 bg-transparent text-sm text-[#30362f] outline-none placeholder:text-[#a0a49b]"
+          />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery("")}
+              className="rounded-full px-2 py-1 text-xs font-medium text-[#687265] hover:bg-[#f1f3ee]"
+            >
+              Clear
+            </button>
+          )}
+        </label>
+        <label className="flex h-12 items-center justify-between gap-3 rounded-xl border border-[#e5e7df] bg-white px-4 text-sm text-[#777d73] sm:ml-auto">
+          <span className="shrink-0">Sort by date</span>
+          <select
+            value={sortOrder}
+            onChange={(event) =>
+              setSortOrder(event.target.value === "latest" ? "latest" : "soonest")
+            }
+            className="min-w-0 cursor-pointer bg-transparent font-medium text-[#30362f] outline-none"
+          >
+            <option value="soonest">Soonest first</option>
+            <option value="latest">Latest first</option>
+          </select>
+        </label>
+      </div>
 
       <div className="mb-6 flex flex-wrap gap-2" aria-label="Filter by category">
         {categories.map((category) => {
@@ -90,7 +111,7 @@ export default function EventExplorer() {
 
       {filteredEvents.length > 0 ? (
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredEvents.map((event) => (
+          {sortedEvents.map((event) => (
             <EventCard key={event.id} event={event} />
           ))}
         </div>
