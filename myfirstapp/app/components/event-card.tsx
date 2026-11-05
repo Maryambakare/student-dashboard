@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import SaveEventButton from "./save-event-button";
+
 export type EventCategory = "Tech" | "Sports" | "Faith" | "Social";
 
 export interface CampusEvent {
@@ -40,26 +42,34 @@ export function CategoryBadge({ category }: { category: EventCategory }) {
 
 export default function EventCard({ event }: { event: CampusEvent }) {
   return (
-    <Link
-      href={`/events/${event.id}`}
-      className="group overflow-hidden rounded-2xl border border-[#e9e9e1] bg-white shadow-[0_3px_14px_rgba(37,41,34,0.035)] transition duration-300 hover:-translate-y-1.5 hover:border-[#d5ded2] hover:shadow-[0_16px_34px_rgba(37,41,34,0.11)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#315e47]"
+    <article
+      className="group relative overflow-hidden rounded-2xl border border-[#e9e9e1] bg-white shadow-[0_3px_14px_rgba(37,41,34,0.035)] transition duration-300 hover:-translate-y-1.5 hover:border-[#d5ded2] hover:shadow-[0_16px_34px_rgba(37,41,34,0.11)]"
     >
-      <div
-        role="img"
-        aria-label={event.title}
-        className="relative h-[210px] bg-cover bg-center transition-transform duration-500 group-hover:scale-[1.02]"
-        style={{
-          backgroundImage: `linear-gradient(180deg, transparent 48%, rgba(19, 28, 23, .42) 100%), url("${event.image}")`,
-        }}
+      <Link
+        href={`/events/${event.id}`}
+        aria-label={`View ${event.title} details`}
+        className="block overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-white"
       >
-        <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3">
-          <CategoryBadge category={event.category} />
-          <span className="rounded-full bg-white/95 px-3 py-1.5 text-xs font-medium text-[#383d35] shadow-sm">
-            {formatEventDate(event.date)}
-          </span>
+        <div
+          role="img"
+          aria-label={event.title}
+          className="relative h-[210px] bg-cover bg-center transition-transform duration-500 group-hover:scale-[1.02]"
+          style={{
+            backgroundImage: `linear-gradient(180deg, transparent 48%, rgba(19, 28, 23, .42) 100%), url("${event.image}")`,
+          }}
+        >
+          <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3">
+            <CategoryBadge category={event.category} />
+            <span className="rounded-full bg-white/95 px-3 py-1.5 text-xs font-medium text-[#383d35] shadow-sm">
+              {formatEventDate(event.date)}
+            </span>
+          </div>
         </div>
+      </Link>
+      <div className="absolute right-4 top-4 z-10">
+        <SaveEventButton eventId={event.id} eventTitle={event.title} />
       </div>
-      <div className="p-5">
+      <Link href={`/events/${event.id}`} className="block p-5 focus-visible:outline-2 focus-visible:outline-[#315e47]">
         <h3 className="line-clamp-1 text-[17px] font-semibold tracking-[-0.3px] text-[#292e28]">
           {event.title}
         </h3>
@@ -91,7 +101,7 @@ export default function EventCard({ event }: { event: CampusEvent }) {
             &rarr;
           </span>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </article>
   );
 }

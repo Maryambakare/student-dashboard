@@ -1,6 +1,15 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { useSavedEvents } from "./saved-events-context";
 
 export default function SiteHeader() {
+  const pathname = usePathname();
+  const { isReady, savedEventIds } = useSavedEvents();
+  const isMyEventsPage = pathname === "/my-events";
+
   return (
     <header className="sticky top-0 z-20 border-b border-[#e8e7df] bg-[#fbfbf8]/95 backdrop-blur">
       <div className="mx-auto flex h-[76px] max-w-[1240px] items-center justify-between px-5 sm:px-8">
@@ -26,15 +35,34 @@ export default function SiteHeader() {
         <nav aria-label="Main navigation" className="flex items-center gap-2 sm:gap-3">
           <Link
             href="/"
-            className="rounded-full px-4 py-2 text-sm font-medium text-[#555b51] transition-colors hover:bg-[#eff1eb] hover:text-[#315e47]"
+            aria-current={pathname === "/" ? "page" : undefined}
+            className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+              pathname === "/"
+                ? "bg-[#eff1eb] text-[#315e47]"
+                : "text-[#555b51] hover:bg-[#eff1eb] hover:text-[#315e47]"
+            }`}
           >
             Discover
           </Link>
           <Link
             href="/my-events"
-            className="rounded-full bg-[#315e47] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#264b39]"
+            aria-current={isMyEventsPage ? "page" : undefined}
+            className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+              isMyEventsPage
+                ? "bg-[#315e47] text-white"
+                : "text-[#555b51] hover:bg-[#eff1eb] hover:text-[#315e47]"
+            }`}
           >
             My events
+            {isReady && savedEventIds.length > 0 && (
+              <span
+                className={`grid min-w-5 place-items-center rounded-full px-1 text-[11px] ${
+                  isMyEventsPage ? "bg-white/20 text-white" : "bg-[#e2ebe0] text-[#315e47]"
+                }`}
+              >
+                {savedEventIds.length}
+              </span>
+            )}
           </Link>
         </nav>
       </div>
