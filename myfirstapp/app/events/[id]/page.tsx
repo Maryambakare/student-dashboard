@@ -6,6 +6,10 @@ import EventCountdown from "../../components/event-countdown";
 import SaveEventButton from "../../components/save-event-button";
 import events from "../../data";
 
+export function generateStaticParams() {
+  return events.map((event) => ({ id: event.id }));
+}
+
 export default async function EventDetailsPage({
   params,
 }: {
